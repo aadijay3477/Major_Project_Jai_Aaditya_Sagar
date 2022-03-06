@@ -1,12 +1,9 @@
-from plotly.subplots import make_subplots
-import yfinance as yf
-import matplotlib.pyplot as plt
 from datetime import datetime as dt
 import time
 import pandas as pd
 import os, csv
 import talib
-from flask import Flask, escape, request, render_template
+from flask import Flask, request, render_template
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 from patterns import candlestick_patterns
