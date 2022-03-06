@@ -3,6 +3,7 @@ import time
 import pandas as pd
 import os, csv
 import talib
+import plotly.graph_objects as go
 from flask import Flask, request, render_template
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -30,6 +31,9 @@ def myform():
                 try:
                     response = urlopen(req)
                     df=pd.read_csv(response)
+                    fig = go.Figure(data=[go.Candlestick(x=df['Date'],open=df['Open'],high=df['High'],low=df['Low'],close=df['Close'])])
+                    fig.update_layout(xaxis_rangeslider_visible=False)
+                    fig.write_image('datasets/images/{}.jpeg'.format(symbol))
                     df.to_csv('datasets/daily/{}.csv'.format(symbol))
                 except HTTPError as e:
                     print('The server couldn\'t fulfil request for', symbol)
@@ -49,6 +53,7 @@ def myform():
             df = pd.read_csv('datasets/daily/{}'.format(filename))
             pattern_function = getattr(talib, pattern)
             symbol = filename.split('.')[0]
+            
 
             try:
                 results = pattern_function(df['Open'], df['High'], df['Low'], df['Close'])
