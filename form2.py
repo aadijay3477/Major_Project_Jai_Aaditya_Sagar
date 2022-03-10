@@ -6,7 +6,7 @@ from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 from patterns import candlestick_patterns
 
-with open('datasets2/symbols.csv') as f:
+with open('datasets2/nifty50.csv') as f:
     for line in f:
         if "," not in line:
             continue
