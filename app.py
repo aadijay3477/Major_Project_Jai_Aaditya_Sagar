@@ -119,7 +119,7 @@ def myform2():
                 continue
     return{ 'code' : 'success' }
 
-@app.route('/nft50', methods=['POST','GET'])
+@app.route('/nifty', methods=['POST','GET'])
 def myform3():
     if request.method=="POST":
         # pd1 = request.form.get('sdate')
@@ -148,11 +148,11 @@ def myform3():
                             ts = dt.fromtimestamp(i).strftime('%Y-%m-%d %H:%M:%S')
                             time[ctr] = ts
                             ctr=ctr+1
-                        open= y['indicators']['quote'][0]['open']
-                        high= y['indicators']['quote'][0]['high']
-                        low=  y['indicators']['quote'][0]['low']
-                        close= y['indicators']['quote'][0]['close']
-                        data2=pd.DataFrame(list(zip(time,open,high,low,close)),columns=['timestamp','open','high','low','close'])
+                        op= y['indicators']['quote'][0]['open']
+                        hi= y['indicators']['quote'][0]['high']
+                        lo=  y['indicators']['quote'][0]['low']
+                        cl= y['indicators']['quote'][0]['close']
+                        data2=pd.DataFrame(list(zip(time,op,hi,lo,cl)),columns=['timestamp','open','high','low','close'])
                         data2.to_csv('datasets3/hourly/{}.csv'.format(symbol))
                         fig = go.Figure(data=[go.Candlestick(x=data2['timestamp'],open=data2['open'],high=data2['high'],low=data2['low'],close=data2['close'])])
                         fig.update_layout(xaxis_rangeslider_visible=False)
